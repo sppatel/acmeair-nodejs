@@ -23,7 +23,7 @@ metadata:
   labels:
     run: acmeair
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       run: acmeair
@@ -44,6 +44,12 @@ spec:
           imagePullPolicy: Always
           ports:
           - containerPort: 27017
+          volumeMounts:
+          - mountPath: /data/db
+            name: mongo-data
+      volumes:
+      - name: mongo-data
+        emptyDir: {}
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
